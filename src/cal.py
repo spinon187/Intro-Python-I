@@ -23,19 +23,17 @@ import sys
 import calendar
 from datetime import datetime
 
-today = datetime.today()
+m = datetime.today().month
+y = datetime.today().year
 c = calendar.TextCalendar()
-m = input("Enter month: ")
-y = input("Enter year: ")
+args = [i for i in sys.argv]
 
+def output(year, month):
+  if len(args) == 3:
+    year = int(args[2])
+    month = int(args[1])
+  elif len(args) == 2:
+    month = int(args[1])
+  print(c.formatmonth(year, month))
 
-def output(month, year):
-  print(year, month)
-  if month and year:
-    print(c.formatmonth(int(year), int(month)))
-  elif month and not year:
-    print(c.formatmonth(today.year, int(month)))
-  else:
-    print(c.formatmonth(today.year, today.month))
-
-output(m, y)
+output(y, m)
